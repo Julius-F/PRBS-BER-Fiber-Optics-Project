@@ -127,13 +127,6 @@ module control_awaddr_sm
         // add ports here
     );
 
-    // declare signals here
-    // define enum for state machine states
-    // you need an entry for each state
-    // the number assigned will be the index in the 1-hot signal for the state machine
-    // width is ceil(log2(size_of_enum))
-    // in this case, ceil(log2(3)) = 2
-
     typedef enum    logic   [1:0]
     {
         state_awaddr_idle           = 0,
@@ -142,7 +135,7 @@ module control_awaddr_sm
     }
     e_state_awaddr_index;
 
-    // declare state machine signals, current and next
+    // state machine signals, current and next
     // width is the same as the size of the enum, in this case 3
     // state signal is 1-hot, meaning that only 1 bit will be set at a time
 
@@ -341,13 +334,6 @@ module control_wdata_sm
         input   wire            m_axi_awready   
         // add ports here
     );
-
-    // declare signals here
-    // define enum for state machine states
-    // you need an entry for each state
-    // the number assigned will be the index in the 1-hot signal for the state machine
-    // width is ceil(log2(size_of_enum))
-    // in this case, ceil(log2(3)) = 2
 
     typedef enum    logic   [1:0]
     {
