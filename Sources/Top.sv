@@ -1,24 +1,23 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/25/2025 03:17:42 PM
-// Design Name: 
-// Module Name: Top
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
+/******************************************************************************
+
+    Top.sv module
+
+*******************************************************************************
+
+ created on:    11/25/2025
+ created by:    J.Faller
+ last edit on:  1/19/2026
+ last edit by:  J.Faller
+
+*******************************************************************************
+Bit error rate measurement FPGA
+Top Module
+
+ This module instantiates other modules in the design
+ ******************************************************************************/
+ 
+`timescale 1ns / 1ps
 
 module Top(
     input   wire        clk_in1 ,
@@ -28,13 +27,18 @@ module Top(
     output  logic       bitout
            );
     
+// Define variables    
+    
     logic               clk_100     ;
     logic    [15:0]     error_rate  ;
     logic               rst         ;
     
     
     
-    
+/*************************************************************
+        Instantiate Generator Module
+*************************************************************/
+
     
     PRBS_Generator    PRBS_Generator_0    
     (
@@ -43,6 +47,10 @@ module Top(
     .error_rate     (error_rate     ),      
     .bitout         (bitout         )           // output pin
     );
+    
+/*************************************************************
+        Instantiate receiver module
+*************************************************************/
     
     PRBS_Receiver     PRBS_Receiver_0     
     (   
@@ -54,6 +62,9 @@ module Top(
     .total_bits_out (total_bits_out )           // output pin
     );
     
+/*************************************************************
+        Instantiate UARTLite IP
+*************************************************************/
     
     axi_uartlite_0    uartlite_0           
     (
@@ -87,6 +98,9 @@ module Top(
     .tx             (tx             )           // output wire tx
     );
 
+/*************************************************************
+        Instantiate ClK Wizard
+*************************************************************/
 
     clk_wiz_1         clk_wizard_0
     (
