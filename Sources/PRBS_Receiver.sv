@@ -110,7 +110,14 @@ output  logic   [31:0   ]   total_bits_out      // total bits received
             end
         end
 // Tabulate generated and received bits
-            total_bits  <= total_bits + 1'b1                    ;
+            if (word_flag == 1)
+                begin
+                total_bits  <=  32'b0                           ;
+                end
+            else
+                begin
+                total_bits  <=  total_bits + 1'b1               ;
+                end
             if (bit_in_1 !== bit_compare) // if generated and received bit are different increment error counter
             begin
                 error_bits  <= error_bits + 1'b1;
