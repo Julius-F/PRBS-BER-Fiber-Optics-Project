@@ -32,11 +32,11 @@ module PRBS_testbench;
     logic               send_data       ;
     logic   [31:0]      error_bits_out  ;
     logic   [31:0]      total_bits_out  ;
-    logic   [6:0]       wordtest        ;
-    logic   [15:0]      countertest     ;
-    logic               bitin           ;
-    logic               bitout          ;
-    logic   [15:0]      measured_error_rate;
+//    logic   [6:0]       wordtest        ;
+//    logic   [15:0]      countertest     ;
+//    logic               bitin           ;
+//    logic               bitout          ;
+//    logic   [15:0]      measured_error_rate;
 // define clk frequency
     parameter       clk_period = 10; // 100 MHz
 
@@ -60,11 +60,11 @@ module PRBS_testbench;
     .get_word       (get_word       ),          // input pin
     .error_bits_out (error_bits_out ),          // output pin
     .total_bits_out (total_bits_out ),          // output pin
-    .send_data      (send_data      ),           // output pin
-    .wordtest       (wordtest       ),
-    .countertest    (countertest    ),
-    .bitin          (bitin          ),
-    .bitout         (bitout         ) 
+    .send_data      (send_data      )           // output pin
+//    .wordtest       (wordtest       ),
+//    .countertest    (countertest    ),
+//    .bitin          (bitin          ),
+//    .bitout         (bitout         ) 
     ); 
 
 //********************************************************************
@@ -89,13 +89,20 @@ module PRBS_testbench;
         #50;
 
     // set error rate and get word to start measuring ber
-        error_rate  =  16'd100;
+        error_rate  =  16'd1000;
+        #10;
         get_word    =  1'b1;
         #50;
         get_word    =  1'b0;
 
     // let test run
-        #10000000;
+        #2000000;
+    
+    // Change error rate
+        error_rate = 16'd5000;
+        
+    // Let test run
+        #2000000;
     end
     
 endmodule
